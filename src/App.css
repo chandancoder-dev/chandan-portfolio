@@ -27,9 +27,9 @@ main {
   display: flex;
   align-items: center;
   gap: 2px;
-  font-size: 25px;
+  font-size: 19px;
   font-weight: 700;
-  letter-spacing: -2px;
+  letter-spacing: -0.5px;
 }
 
 .wordmark-dot,
@@ -1113,11 +1113,18 @@ main {
 
 .experience-row {
   display: grid;
-  grid-template-columns: 45px 135px minmax(0, 1fr) 20px;
+  grid-template-columns: 45px minmax(0, 1fr) 20px;
   align-items: start;
   gap: 20px;
   padding: 27px 0;
   border-bottom: 1px solid #ccc3b4;
+}
+
+.exp-highlight {
+  background: none;
+  color: var(--red);
+  font-style: normal;
+  font-weight: 600;
 }
 
 .experience-number,
@@ -1325,7 +1332,7 @@ main {
   }
 
   .wordmark {
-    font-size: 23px;
+    font-size: 17px;
   }
 
   .wordmark small {
@@ -1540,15 +1547,9 @@ main {
     grid-row: 1 / span 2;
   }
 
-  .experience-year {
-    grid-column: 2;
-    grid-row: 1;
-    padding: 0;
-  }
-
   .experience-content {
     grid-column: 2;
-    grid-row: 2;
+    grid-row: 1;
   }
 
   .experience-content h3 {

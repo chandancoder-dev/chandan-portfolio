@@ -49,27 +49,30 @@ const projects = [
 const experience = [
   {
     index: "01",
-    year: "JUL — OCT 2026",
-    role: "Web Development Intern",
-    company: "Axlero Solutions",
-    details:
-      "Remote internship focused on web development, team collaboration, and practical development workflows.",
+    role: "Web Developer & Team Lead",
+    company: "Axlero Innovative Solutions",
+    detailsParts: [
+      "Worked as a Web Developer and led a team, coordinating collaboration and development tasks.",
+    ],
+    highlights: ["Team Lead"],
   },
   {
     index: "02",
-    year: "2026",
     role: "Web Developer Intern",
     company: "InAmigos Foundation",
-    details:
-      "Created an NGO awareness webpage and was recognised as a Top 3 Performer.",
+    detailsParts: [
+      "Developed an NGO awareness webpage and was recognised as a 2nd Top Performer.",
+    ],
+    highlights: ["2nd Top Performer"],
   },
   {
     index: "03",
-    year: "2026",
-    role: "Hackathon Team Lead",
-    company: "Career AI Pilot",
-    details:
-      "Led a team developing an AI-powered career assistance concept, exploring AI tools and workflow automation.",
+    role: "Hackathon Team Lead & Developer",
+    company: "Agentic AI Hackathon and Workshop",
+    detailsParts: [
+      "Led a team to build Career AI Pilot, an AI-powered career assistance project using AI tools and n8n workflow automation.",
+    ],
+    highlights: [],
   },
 ];
 
@@ -229,7 +232,7 @@ function App() {
     <main>
       <header className="site-header">
         <a className="wordmark" href="#home" onClick={closeMenu}>
-          CK<span className="wordmark-dot">.</span>
+          Chandan K R<span className="wordmark-dot">.</span>
           <small>PERSONAL ARCHIVE / 2026</small>
         </a>
 
@@ -497,18 +500,41 @@ function App() {
           </div>
 
           <div className="experience-list">
-            {experience.map((item) => (
-              <article className="experience-row" key={item.index}>
-                <span className="experience-number">{item.index}</span>
-                <span className="experience-year">{item.year}</span>
-                <div className="experience-content">
-                  <h3>{item.role}</h3>
-                  <p className="experience-company">{item.company}</p>
-                  <p className="experience-details">{item.details}</p>
-                </div>
-                <span className="experience-mark">↗</span>
-              </article>
-            ))}
+            {experience.map((item) => {
+              // Replace highlighted phrases with <mark> spans
+              const renderDetails = (parts, highlights) => {
+                const text = parts[0];
+                if (!highlights || highlights.length === 0) return text;
+                const escaped = highlights.map((h) =>
+                  h.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"),
+                );
+                const regex = new RegExp(`(${escaped.join("|")})`, "g");
+                const segments = text.split(regex);
+                return segments.map((seg, i) =>
+                  highlights.includes(seg) ? (
+                    <mark key={i} className="exp-highlight">
+                      {seg}
+                    </mark>
+                  ) : (
+                    seg
+                  ),
+                );
+              };
+
+              return (
+                <article className="experience-row" key={item.index}>
+                  <span className="experience-number">{item.index}</span>
+                  <div className="experience-content">
+                    <h3>{item.role}</h3>
+                    <p className="experience-company">{item.company}</p>
+                    <p className="experience-details">
+                      {renderDetails(item.detailsParts, item.highlights)}
+                    </p>
+                  </div>
+                  <span className="experience-mark">↗</span>
+                </article>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -533,9 +559,7 @@ function App() {
             </p>
 
             <div className="contact-links">
-              <a
-                href="mailto:chandankrc498@gmail.com"
-              >
+              <a href="mailto:chandankrc498@gmail.com">
                 EMAIL ME <span>↗</span>
               </a>
               <a

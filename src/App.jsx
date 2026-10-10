@@ -1,412 +1,568 @@
-import {
-  ArrowDownRight,
-  ArrowUpRight,
-  Code2,
-  Terminal,
-  Sparkles,
-} from "lucide-react";
+import { useState } from "react";
+import "./App.css";
 
 const projects = [
   {
     number: "01",
     name: "Career AI Pilot",
-    type: "HACKATHON / AI",
+    category: "HACKATHON / TEAM LEAD",
+    year: "2026",
     description:
-      "An AI-powered career assistant built with a team I led during a hackathon.",
-    tags: ["AI", "n8n", "Product Development"],
-    color: "from-blue-500/20 to-cyan-400/5",
+      "An AI-powered career guidance concept built during a hackathon. I led the team and explored how AI and workflow automation could make career discovery more useful.",
+    tags: ["AI", "Google AI Studio", "n8n", "Lovable"],
+    visual: "career",
+    featured: true,
+    url: "https://github.com/chandancoder-dev/CareerAI-Pilot",
   },
   {
     number: "02",
     name: "Forma AI",
-    type: "GENERATIVE FORMS",
+    category: "DYNAMIC FORM EXPERIENCE",
+    year: "2026",
     description:
-      "Dynamic form rendering with reusable React components and structured inputs.",
-    tags: ["React", "JavaScript", "Forms"],
-    color: "from-violet-500/20 to-blue-500/5",
+      "A dynamic form application. My contribution focused on reusable React components that render form fields from structured schemas.",
+    tags: ["React", "JavaScript", "Dynamic UI"],
+    visual: "forms",
   },
   {
     number: "03",
     name: "Audit Trail",
-    type: "TEAM PROJECT",
+    category: "TEAM PROJECT",
+    year: "2026",
     description:
-      "A shipment audit application exploring event timelines and historical states.",
-    tags: ["React", "Event History", "UI"],
-    color: "from-cyan-500/20 to-teal-400/5",
+      "A shipment audit trail application with event history and historical state reconstruction. My area of work is the Historical State interface.",
+    tags: ["React", "Event History", "Timeline UI"],
+    visual: "audit",
+  },
+  {
+    number: "04",
+    name: "SyncSpace",
+    category: "COLLABORATIVE PROJECT",
+    year: "2026",
+    description:
+      "A team project where I worked on frontend development and component-based interface building.",
+    tags: ["Frontend", "React", "Team Project"],
+    visual: "sync",
   },
 ];
 
-function App() {
+const experience = [
+  {
+    index: "01",
+    year: "JUL — OCT 2026",
+    role: "Web Development Intern",
+    company: "Axlero Solutions",
+    details:
+      "Remote internship focused on web development, team collaboration, and practical development workflows.",
+  },
+  {
+    index: "02",
+    year: "2026",
+    role: "Web Developer Intern",
+    company: "InAmigos Foundation",
+    details:
+      "Created an NGO awareness webpage and was recognised as a Top 3 Performer.",
+  },
+  {
+    index: "03",
+    year: "2026",
+    role: "Hackathon Team Lead",
+    company: "Career AI Pilot",
+    details:
+      "Led a team developing an AI-powered career assistance concept, exploring AI tools and workflow automation.",
+  },
+];
+
+const skillGroups = [
+  {
+    number: "01",
+    title: "Interface",
+    items: "HTML · CSS · JavaScript · React · Bootstrap",
+  },
+  {
+    number: "02",
+    title: "Logic & data",
+    items: "Python · Node.js · Express · MongoDB · SQLite",
+  },
+  {
+    number: "03",
+    title: "Workflow",
+    items: "Git · GitHub · VS Code · Vercel · n8n",
+  },
+];
+
+function ProjectArtwork({ type, number }) {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-[#080B12] text-slate-100">
-      {/* Background atmosphere */}
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_75%_25%,rgba(37,99,235,0.15),transparent_40%)]" />
-      <div className="grid-overlay pointer-events-none absolute inset-0 opacity-30" />
+    <div
+      className={`project-art art-${type}`}
+      aria-label={`${type} project illustration`}
+      role="img"
+    >
+      <span className="art-index">FIG. {number}</span>
 
-      {/* Navigation */}
-      <header className="relative z-10 border-b border-white/[0.08]">
-        <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
-          <a href="#home" className="flex items-center gap-3">
-            <span className="flex h-10 w-10 items-center justify-center rounded-xl border border-blue-400/30 bg-blue-500/10 font-mono text-sm font-bold text-blue-400">
-              CK
-            </span>
-            <span className="font-semibold tracking-tight">
-              chandan<span className="text-blue-400">.dev</span>
-            </span>
-          </a>
-
-          <div className="hidden items-center gap-8 text-sm text-slate-400 md:flex">
-            <a className="transition hover:text-white" href="#home">
-              Home
-            </a>
-            <a className="transition hover:text-white" href="#projects">
-              Projects
-            </a>
-            <a className="transition hover:text-white" href="#about">
-              About
-            </a>
-            <a className="transition hover:text-white" href="#contact">
-              Contact
-            </a>
+      {type === "career" && (
+        <>
+          <div className="career-orbit orbit-one" />
+          <div className="career-orbit orbit-two" />
+          <div className="career-core">AI</div>
+          <div className="career-node node-one">SKILLS</div>
+          <div className="career-node node-two">ROLES</div>
+          <div className="career-node node-three">YOU</div>
+          <div className="career-caption">
+            <span>CAREER / MAP</span>
+            <span>01—04</span>
           </div>
+          <div className="career-mini-card">
+            <span className="mini-dot" />
+            <div>
+              <small>YOUR NEXT MOVE</small>
+              <strong>Find your direction.</strong>
+            </div>
+            <span className="mini-arrow">↗</span>
+          </div>
+        </>
+      )}
 
-          <a
-            href="#projects"
-            className="group flex items-center gap-2 rounded-full border border-blue-400/30 px-4 py-2 text-sm text-blue-300 transition hover:bg-blue-500/10"
-          >
-            Explore work
-            <ArrowUpRight
-              size={15}
-              className="transition group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-            />
+      {type === "forms" && (
+        <>
+          <div className="form-art-title">INPUT / OUTPUT</div>
+          <div className="form-window">
+            <div className="form-window-top">
+              <span>FORM_SCHEMA.JSON</span>
+              <span>↗</span>
+            </div>
+            <div className="form-field">
+              <span>01</span>
+              <div className="fake-input">Full name</div>
+              <span>↳</span>
+            </div>
+            <div className="form-field">
+              <span>02</span>
+              <div className="fake-input">Select a category</div>
+              <span>⌄</span>
+            </div>
+            <div className="form-field">
+              <span>03</span>
+              <div className="fake-input">Your response...</div>
+              <span>↳</span>
+            </div>
+            <div className="form-submit">
+              RENDER FORM <span>↗</span>
+            </div>
+          </div>
+          <span className="form-stamp">
+            DYNAMIC
+            <br />
+            BY DESIGN
+          </span>
+        </>
+      )}
+
+      {type === "audit" && (
+        <>
+          <span className="audit-coordinate">SHIPMENT / HISTORY</span>
+          <div className="audit-track">
+            <div className="track-line" />
+            <div className="track-event">
+              <span className="track-point filled" />
+              <div>
+                <small>EVENT 001</small>
+                <strong>Container created</strong>
+              </div>
+              <time>09:10</time>
+            </div>
+            <div className="track-event">
+              <span className="track-point" />
+              <div>
+                <small>EVENT 002</small>
+                <strong>Loaded on ship</strong>
+              </div>
+              <time>13:45</time>
+            </div>
+            <div className="track-event alert-event">
+              <span className="track-point" />
+              <div>
+                <small>EVENT 003</small>
+                <strong>Temperature spike</strong>
+              </div>
+              <time>16:20</time>
+            </div>
+          </div>
+          <div className="audit-footer">
+            RECONSTRUCT THE PAST. UNDERSTAND THE PRESENT.
+          </div>
+        </>
+      )}
+
+      {type === "sync" && (
+        <>
+          <div className="sync-shape shape-one">S</div>
+          <div className="sync-shape shape-two">S.</div>
+          <div className="sync-shape shape-three">+</div>
+          <div className="sync-label">
+            <small>TEAM SPACE / 001</small>
+            <strong>
+              Different minds.
+              <br />
+              One shared space.
+            </strong>
+          </div>
+          <div className="sync-bottom">
+            <span>IDEA</span>
+            <span>↗</span>
+            <span>BUILD</span>
+            <span>↗</span>
+            <span>SHARE</span>
+          </div>
+        </>
+      )}
+    </div>
+  );
+}
+
+function App() {
+  const [menuOpen, setMenuOpen] = useState(false);
+
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <main>
+      <header className="site-header">
+        <a className="wordmark" href="#home" onClick={closeMenu}>
+          CK<span className="wordmark-dot">.</span>
+          <small>PERSONAL ARCHIVE / 2026</small>
+        </a>
+
+        <button
+          className="mobile-menu"
+          type="button"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-expanded={menuOpen}
+          aria-controls="primary-navigation"
+        >
+          {menuOpen ? "CLOSE −" : "MENU +"}
+        </button>
+
+        <nav
+          id="primary-navigation"
+          className={`main-nav ${menuOpen ? "nav-open" : ""}`}
+        >
+          <a href="#work" onClick={closeMenu}>
+            Selected work <span>01</span>
+          </a>
+          <a href="#about" onClick={closeMenu}>
+            The person <span>02</span>
+          </a>
+          <a href="#experience" onClick={closeMenu}>
+            Experience <span>03</span>
+          </a>
+          <a className="nav-contact" href="#contact" onClick={closeMenu}>
+            Let's talk <span>↗</span>
           </a>
         </nav>
       </header>
 
-      {/* Hero */}
-      <section
-        id="home"
-        className="relative z-10 mx-auto grid max-w-7xl items-center gap-14 px-6 py-20 sm:py-28 lg:grid-cols-[1.1fr_0.9fr] lg:px-10 lg:py-32"
-      >
-        <div>
-          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.03] px-4 py-2 text-xs tracking-wide text-slate-300">
-            <span className="h-2 w-2 rounded-full bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.7)]" />
-            BCA STUDENT · DEVELOPER · BUILDER
-          </div>
-
-          <p className="mb-4 font-mono text-sm text-blue-400">
-            {"// Hello, world. I'm Chandan."}
+      <section className="hero page-shell" id="home">
+        <div className="hero-topline">
+          <p>
+            <span className="live-dot" /> OPEN TO INTERESTING OPPORTUNITIES
           </p>
-
-          <h1 className="max-w-3xl text-5xl font-semibold leading-[1.08] tracking-[-0.055em] sm:text-6xl lg:text-7xl">
-            Turning ideas
-            <br />
-            into{" "}
-            <span className="bg-gradient-to-r from-blue-400 via-cyan-300 to-blue-500 bg-clip-text text-transparent">
-              digital things.
-            </span>
-          </h1>
-
-          <p className="mt-7 max-w-xl text-base leading-8 text-slate-400 sm:text-lg">
-            I build web experiences, explore AI-powered products, and turn
-            concepts into working projects. This is where my work, experiments,
-            and developer journey come together.
-          </p>
-
-          <div className="mt-9 flex flex-wrap gap-4">
-            <a
-              href="#projects"
-              className="group flex items-center gap-3 rounded-xl bg-blue-500 px-6 py-3.5 font-medium text-white transition hover:bg-blue-400"
-            >
-              Explore my projects
-              <ArrowDownRight
-                size={18}
-                className="transition group-hover:translate-y-1"
-              />
-            </a>
-
-            <a
-              href="#contact"
-              className="flex items-center gap-2 rounded-xl border border-white/10 px-6 py-3.5 text-slate-200 transition hover:border-white/25 hover:bg-white/[0.04]"
-            >
-              Let's connect
-              <ArrowUpRight size={17} />
-            </a>
-          </div>
-
-          <div className="mt-12 flex flex-wrap gap-x-8 gap-y-4 border-t border-white/[0.08] pt-7">
-            <div>
-              <p className="font-mono text-2xl font-semibold text-white">01</p>
-              <p className="mt-1 text-xs text-slate-500">
-                Team lead · Hackathon
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-2xl font-semibold text-white">
-                AI + Web
-              </p>
-              <p className="mt-1 text-xs text-slate-500">
-                Areas of exploration
-              </p>
-            </div>
-            <div>
-              <p className="font-mono text-2xl font-semibold text-white">
-                2027
-              </p>
-              <p className="mt-1 text-xs text-slate-500">Expected graduation</p>
-            </div>
-          </div>
+          <p>INDEPENDENTLY CURIOUS. PRACTICALLY MINDED.</p>
         </div>
 
-        {/* Developer workspace */}
-        <div className="relative mx-auto w-full max-w-lg">
-          <div className="absolute -inset-5 rounded-[2rem] bg-blue-500/[0.08] blur-3xl" />
-
-          <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-[#0D121D]/95 shadow-2xl shadow-black/40">
-            <div className="flex items-center justify-between border-b border-white/[0.08] px-5 py-4">
-              <div className="flex items-center gap-2">
-                <span className="h-2.5 w-2.5 rounded-full bg-red-400/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/80" />
-                <span className="h-2.5 w-2.5 rounded-full bg-emerald-400/80" />
-              </div>
-              <span className="font-mono text-xs text-slate-500">
-                developer.workspace
+        <div className="hero-layout">
+          <div className="hero-main">
+            <p className="eyebrow">HELLO, I'M CHANDAN K R — BCA / 2027</p>
+            <h1>
+              I turn ideas
+              <br />
+              into <span className="serif-word">things</span>
+              <br />
+              that <span className="underlined-word">work.</span>
+            </h1>
+            <div className="hero-bottom">
+              <span className="hero-star" aria-hidden="true">
+                ✳
               </span>
-              <Terminal size={16} className="text-blue-400" />
-            </div>
-
-            <div className="space-y-7 p-6 sm:p-8">
-              <div className="flex items-start justify-between gap-4">
-                <div>
-                  <p className="font-mono text-xs text-blue-400">
-                    CURRENT PROFILE
-                  </p>
-                  <h2 className="mt-2 text-2xl font-semibold tracking-tight">
-                    Chandan K R
-                  </h2>
-                  <p className="mt-1 text-sm text-slate-400">
-                    Developer in progress. Builder by practice.
-                  </p>
-                </div>
-                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-blue-400/20 bg-blue-500/10 text-blue-300">
-                  <Code2 size={23} />
-                </div>
-              </div>
-
-              <div className="rounded-xl border border-white/[0.08] bg-black/20 p-4 font-mono text-xs leading-7 sm:text-sm">
-                <p className="text-slate-500">{"// Areas I'm building in"}</p>
-                <p>
-                  <span className="text-violet-300">const</span>{" "}
-                  <span className="text-cyan-300">interests</span> = [
-                </p>
-                <p className="pl-5 text-emerald-300">"Web Development",</p>
-                <p className="pl-5 text-emerald-300">
-                  "Artificial Intelligence",
-                </p>
-                <p className="pl-5 text-emerald-300">"Software Engineering"</p>
-                <p>];</p>
-                <p className="mt-2 text-slate-500">
-                  {"// Learn. Build. Improve. Repeat."}
-                </p>
-              </div>
-
-              <div>
-                <div className="mb-3 flex items-center justify-between">
-                  <p className="text-sm font-medium text-slate-200">
-                    Current toolkit
-                  </p>
-                  <Sparkles size={16} className="text-blue-400" />
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  {["HTML", "CSS", "JavaScript", "React", "Python", "Git"].map(
-                    (skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-lg border border-white/[0.08] bg-white/[0.03] px-3 py-1.5 text-xs text-slate-300"
-                      >
-                        {skill}
-                      </span>
-                    ),
-                  )}
-                </div>
-              </div>
-
-              <div className="flex items-center justify-between border-t border-white/[0.08] pt-5 text-xs">
-                <span className="text-slate-500">
-                  STATUS: LEARNING & BUILDING
-                </span>
-                <span className="font-mono text-blue-400">v1.0.0</span>
-              </div>
+              <p>
+                Developer, team lead, and builder exploring the space between
+                useful software and ambitious ideas.
+              </p>
+              <a href="#work" className="text-link">
+                EXPLORE SELECTED WORK <span>↓</span>
+              </a>
             </div>
           </div>
 
-          <div className="absolute -bottom-5 -left-4 hidden items-center gap-3 rounded-xl border border-white/10 bg-[#111827] px-4 py-3 shadow-xl sm:flex">
-            <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-emerald-400/10 text-emerald-400">
-              <Code2 size={18} />
+          <aside className="hero-art" aria-label="Personal graphic">
+            <div className="hero-art-top">
+              <span>FIELD NOTE No. 001</span>
+              <span>EST. 2026</span>
             </div>
-            <div>
-              <p className="text-xs font-medium text-white">
-                Built through practice
-              </p>
-              <p className="mt-1 text-[11px] text-slate-500">
-                One project at a time
-              </p>
+            <div className="hero-art-center">
+              <div className="art-circle circle-large" />
+              <div className="art-circle circle-small" />
+              <div className="art-cross">+</div>
+              <div className="art-block">
+                <span>THINK</span>
+                <span>MAKE</span>
+                <span>
+                  REFINE<span className="red-period">.</span>
+                </span>
+              </div>
+              <span className="art-side-text">IDEAS IN PROGRESS / ALWAYS</span>
+            </div>
+            <div className="hero-art-bottom">
+              <span>WEB / AI / EXPERIMENTS</span>
+              <span>12° 58' N — 77° 35' E</span>
+            </div>
+          </aside>
+        </div>
+
+        <div className="hero-index">
+          <span>SCROLL TO EXPLORE</span>
+          <span className="index-line" />
+          <span>01 — 04 / SELECTED PROJECTS</span>
+        </div>
+      </section>
+
+      <div
+        className="ticker"
+        aria-label="Ideas, experiments, and things in progress"
+      >
+        <div className="ticker-track">
+          {Array.from({ length: 4 }, (_, index) => (
+            <span key={index}>
+              IDEAS INTO INTERFACES <i>✳</i> EXPERIMENTS INTO EXPERIENCE{" "}
+              <i>✳</i>
+              CODE INTO SOMETHING USEFUL <i>✳</i>
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <section className="work-section page-shell" id="work">
+        <div className="section-heading">
+          <div>
+            <p className="eyebrow">01 / SELECTED WORK</p>
+            <h2>
+              Built, not just
+              <br />
+              <span>imagined.</span>
+            </h2>
+          </div>
+          <p className="section-intro">
+            A collection of projects, prototypes, and team experiences. Each one
+            taught me something worth carrying into the next.
+          </p>
+        </div>
+
+        <div className="project-list">
+          {projects.map((project) => (
+            <article
+              key={project.number}
+              className={`project-row ${project.featured ? "featured-project" : ""}`}
+            >
+              <div className="project-meta">
+                <span className="project-number">{project.number}</span>
+                <span className="project-year">{project.year}</span>
+              </div>
+
+              <div className="project-copy">
+                <p className="eyebrow">{project.category}</p>
+                <h3>
+                  {project.name}
+                  <span className="red-period">.</span>
+                </h3>
+                <p className="project-description">{project.description}</p>
+
+                <div className="project-tags">
+                  {project.tags.map((tag) => (
+                    <span key={tag}>{tag}</span>
+                  ))}
+                </div>
+
+                {project.url ? (
+                  <a
+                    className="text-link project-link"
+                    href={project.url}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    VIEW REPOSITORY <span>↗</span>
+                  </a>
+                ) : (
+                  <span className="project-note">
+                    PROJECT NOTES / IN PROGRESS
+                  </span>
+                )}
+              </div>
+
+              <ProjectArtwork type={project.visual} number={project.number} />
+            </article>
+          ))}
+        </div>
+
+        <div className="work-footer">
+          <span>MORE EXPERIMENTS ARE ALWAYS UNDERWAY.</span>
+          <a
+            href="https://github.com/chandancoder-dev"
+            target="_blank"
+            rel="noreferrer"
+          >
+            BROWSE GITHUB ↗
+          </a>
+        </div>
+      </section>
+
+      <section className="about-section" id="about">
+        <div className="page-shell about-layout">
+          <div className="about-label">
+            <p className="eyebrow">02 / THE PERSON BEHIND THE PROJECTS</p>
+            <div className="round-stamp">
+              <span>LEARN</span>
+              <span className="stamp-symbol">✳</span>
+              <span>BUILD</span>
+              <span className="stamp-symbol">✳</span>
+              <span>REPEAT</span>
+            </div>
+          </div>
+
+          <div className="about-copy">
+            <h2>
+              Still learning.
+              <br />
+              Always <span className="serif-word">making.</span>
+            </h2>
+            <p>
+              I'm a BCA student developing my skills in web development and
+              software engineering through hands-on projects, internships, and
+              collaboration.
+            </p>
+            <p>
+              I enjoy taking an idea apart, understanding how it could work, and
+              helping turn it into something people can actually use. AI-powered
+              applications and the intersection of product thinking and
+              engineering are areas I'm especially interested in exploring.
+            </p>
+
+            <div className="education-line">
+              <span>EDUCATION</span>
+              <strong>Bachelor of Computer Applications</strong>
+              <span>EXPECTED 2027</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Selected projects */}
-      <section
-        id="projects"
-        className="relative z-10 border-t border-white/[0.08] bg-[#0B0F18]/80"
-      >
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
-          <div className="mb-10 flex flex-wrap items-end justify-between gap-5">
+      <section className="skills-section page-shell">
+        <div className="skills-heading">
+          <p className="eyebrow">A WORKING TOOLKIT</p>
+          <h2>
+            Tools of the trade<span className="red-period">.</span>
+          </h2>
+          <p>Technologies I use, practise, and continue to develop with.</p>
+        </div>
+
+        <div className="skills-list">
+          {skillGroups.map((group) => (
+            <div className="skill-row" key={group.number}>
+              <span className="skill-number">{group.number}</span>
+              <h3>{group.title}</h3>
+              <p>{group.items}</p>
+              <span className="skill-arrow">↗</span>
+            </div>
+          ))}
+        </div>
+        <p className="skills-note">
+          MY TOOLKIT WILL CHANGE. MY CURIOSITY WON'T.
+        </p>
+      </section>
+
+      <section className="experience-section" id="experience">
+        <div className="page-shell">
+          <div className="section-heading experience-heading">
             <div>
-              <p className="font-mono text-xs tracking-[0.2em] text-blue-400">
-                01 / SELECTED BUILDS
-              </p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-tight sm:text-4xl">
-                Ideas made tangible<span className="text-blue-400">.</span>
+              <p className="eyebrow">03 / EXPERIENCE & INITIATIVE</p>
+              <h2>
+                Learning by
+                <br />
+                <span>doing.</span>
               </h2>
             </div>
-            <p className="max-w-sm text-sm leading-6 text-slate-400">
-              A selection of products and experiments I've worked on, learned
-              from, and helped bring to life.
+            <p className="section-intro">
+              The places, teams, and challenges that have helped me grow beyond
+              the classroom.
             </p>
           </div>
 
-          <div className="grid gap-4 md:grid-cols-3">
-            {projects.map((project) => (
-              <article
-                key={project.number}
-                className="group overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.02] transition duration-300 hover:-translate-y-1 hover:border-blue-400/30"
-              >
-                <div
-                  className={`relative flex h-40 items-center justify-between overflow-hidden bg-gradient-to-br ${project.color} p-6`}
-                >
-                  <span className="font-mono text-sm text-slate-400">
-                    /PROJECT_{project.number}
-                  </span>
-                  <div className="flex h-12 w-12 items-center justify-center rounded-xl border border-white/10 bg-black/20 text-blue-300 transition group-hover:scale-110">
-                    <Code2 size={23} />
-                  </div>
-                  <span className="absolute bottom-4 left-6 font-mono text-[10px] tracking-[0.2em] text-slate-400">
-                    {project.type}
-                  </span>
+          <div className="experience-list">
+            {experience.map((item) => (
+              <article className="experience-row" key={item.index}>
+                <span className="experience-number">{item.index}</span>
+                <span className="experience-year">{item.year}</span>
+                <div className="experience-content">
+                  <h3>{item.role}</h3>
+                  <p className="experience-company">{item.company}</p>
+                  <p className="experience-details">{item.details}</p>
                 </div>
-
-                <div className="p-6">
-                  <div className="flex items-center justify-between">
-                    <h3 className="text-xl font-semibold">{project.name}</h3>
-                    <ArrowUpRight
-                      size={18}
-                      className="text-slate-500 transition group-hover:text-blue-400"
-                    />
-                  </div>
-                  <p className="mt-3 min-h-16 text-sm leading-6 text-slate-400">
-                    {project.description}
-                  </p>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {project.tags.map((tag) => (
-                      <span
-                        key={tag}
-                        className="rounded-md bg-white/[0.05] px-2.5 py-1 text-[11px] text-slate-400"
-                      >
-                        {tag}
-                      </span>
-                    ))}
-                  </div>
-                </div>
+                <span className="experience-mark">↗</span>
               </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About */}
-      <section
-        id="about"
-        className="relative z-10 border-t border-white/[0.08]"
-      >
-        <div className="mx-auto grid max-w-7xl gap-8 px-6 py-20 lg:grid-cols-2 lg:px-10 lg:py-24">
-          <div>
-            <p className="font-mono text-xs tracking-[0.2em] text-blue-400">
-              02 / THE PERSON BEHIND THE CODE
-            </p>
-            <h2 className="mt-4 max-w-xl text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
-              Curious mind.
-              <br />
-              <span className="text-slate-500">Practical builder.</span>
-            </h2>
+      <footer className="contact-section" id="contact">
+        <div className="page-shell">
+          <div className="contact-kicker">
+            <span>04 / THE NEXT CHAPTER</span>
+            <span>GOOD THINGS START WITH A CONVERSATION.</span>
           </div>
-          <div className="space-y-5 text-sm leading-7 text-slate-400 sm:text-base">
-            <p>
-              I'm Chandan, a BCA student developing my skills in web development
-              and software engineering through hands-on projects and
-              internships.
-            </p>
-            <p>
-              I also enjoy exploring AI-powered applications. During a
-              hackathon, I led a team working on Career AI Pilot, combining
-              product ideas with AI and workflow automation.
-            </p>
-            <p>
-              My goal is to keep learning, build useful software, and grow into
-              an engineer who can take an idea from concept to implementation.
-            </p>
-          </div>
-        </div>
-      </section>
 
-      {/* Contact */}
-      <section
-        id="contact"
-        className="relative z-10 border-t border-white/[0.08]"
-      >
-        <div className="mx-auto max-w-7xl px-6 py-20 lg:px-10 lg:py-24">
-          <div className="rounded-3xl border border-blue-400/20 bg-gradient-to-br from-blue-500/[0.10] via-[#0D121D] to-cyan-500/[0.05] p-8 sm:p-12">
-            <p className="font-mono text-xs tracking-[0.2em] text-blue-400">
-              03 / LET'S CONNECT
+          <h2>
+            Got an idea?
+            <br />
+            <span className="serif-word">Let's make it real.</span>
+          </h2>
+
+          <div className="contact-bottom">
+            <p>
+              Open to connecting with developers, teams, and people working on
+              interesting problems.
             </p>
-            <div className="mt-5 flex flex-col justify-between gap-8 md:flex-row md:items-end">
-              <div>
-                <h2 className="max-w-xl text-3xl font-semibold tracking-tight sm:text-5xl">
-                  Have something interesting in mind?
-                </h2>
-                <p className="mt-4 max-w-lg leading-7 text-slate-400">
-                  Open to connecting with developers, teams, and people building
-                  useful things.
-                </p>
-              </div>
+
+            <div className="contact-links">
               <a
-                href="mailto:YOUR_EMAIL@example.com"
-                className="inline-flex w-fit items-center gap-3 rounded-xl bg-blue-500 px-5 py-3.5 font-medium text-white transition hover:bg-blue-400"
+                href="mailto:chandankrc498@gmail.com"
               >
-                Email me
-                <ArrowUpRight size={18} />
+                EMAIL ME <span>↗</span>
+              </a>
+              <a
+                href="https://github.com/chandancoder-dev"
+                target="_blank"
+                rel="noreferrer"
+              >
+                GITHUB <span>↗</span>
+              </a>
+
+              <a
+                href="https://www.linkedin.com/in/chandan-kr-dev/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                LINKEDIN <span>↗</span>
               </a>
             </div>
-            <p className="mt-10 text-xs text-slate-500">
-              Replace the placeholder email and add your real social profile
-              links before publishing.
-            </p>
           </div>
-        </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="relative z-10 border-t border-white/[0.08]">
-        <div className="mx-auto flex max-w-7xl flex-col gap-4 px-6 py-6 text-xs text-slate-500 sm:flex-row sm:items-center sm:justify-between lg:px-10">
-          <p>© {new Date().getFullYear()} Chandan K R · Built with React.</p>
-          <div className="flex gap-5">
-            <a href="#home" className="transition hover:text-white">
-              Back to top ↑
+          <div className="footer-bottom">
+            <a className="footer-wordmark" href="#home">
+              CK<span>.</span>
             </a>
-            <a href="#projects" className="transition hover:text-white">
-              Projects
-            </a>
+            <span>DESIGNED WITH INTENTION. BUILT WITH CODE.</span>
+            <a href="#home">BACK TO THE TOP ↑</a>
+            <span>© {new Date().getFullYear()} CHANDAN K R</span>
           </div>
         </div>
       </footer>
